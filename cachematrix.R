@@ -1,29 +1,45 @@
-# TODO: none 
-# 
+# Summary: Assignment #2
 # Author: BrianC-CMH
 ###############################################################################
 
-## This function creates a special "matrix" object that can cache its inverse.
 makeCacheMatrix <- function(x = matrix()) {
+	# Creates a special "matrix" object that can cache its inverse.
+	#
+	# Args:
+	#   x: Matrix to be used in set command
+	#
+	# Returns:
+	#   list containing matrix object used in set
+	
 	m <- NULL
+	# Simple getters and setters
 	set <- function(y) {
 		x <<- y
 		m <<- NULL
 	}
 	get <- function() x
+	
 	setinverse <- function(solve) m <<- solve
 	getinverse <- function() m
+	
+	# Return list object
 	list(set = set, get = get,
 			setinverse = setinverse,
 			getinverse = getinverse)
 	
 }
 
-## This function computes the inverse of the special "matrix" returned by 
-## makeCacheMatrix above. If the inverse has already been calculated (and the 
-## matrix has not changed), then cacheSolve should retrieve the inverse from the cache.
 cacheSolve <- function(x, ...) {
-	## Return a matrix that is the inverse of 'x'
+	# This function computes the inverse of the special "matrix" returned by
+	# makeCacheMatrix function. If the inverse has already been calculated (and the 
+	# matrix has not changed), then cacheSolve should retrieve the inverse from the cache.
+	#
+	# Args:
+	#   x: Matrix to be used for inversion
+	#
+	# Returns:
+	#   m: Inversed matrix object
+	
 	m <- x$getinverse()
 	# See if inverse object already exists; if so return
 	if(!is.null(m)) {
@@ -36,3 +52,4 @@ cacheSolve <- function(x, ...) {
 	x$setinverse(m)
 	m
 }
+
